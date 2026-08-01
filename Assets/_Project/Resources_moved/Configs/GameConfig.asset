@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86bdd32330d4ebba54322c66e1d3f5b, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  PlayerReference:
+    m_AssetGUID: 156fce3ca50462b44a49a6638f852656
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  MainCameraReference:
+    m_AssetGUID: bb358aed37131164f8ef69ce6c35d4fc
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  CinemachineReference:
+    m_AssetGUID: 926144eec30489e45814df3028759613
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  PlayerMoveSpeed: 5
+  PlayerRotationSpeed: 720

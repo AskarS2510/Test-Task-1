@@ -35,6 +35,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcd93e17c2de8284da8b4d27726bcd5e
+    m_Address: Assets/_Project/Resources_moved/Gameplay/UIMediator.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d8fcf1b4f77ea08459cb030229a99076
     m_Address: Level_1
     m_ReadOnly: 0

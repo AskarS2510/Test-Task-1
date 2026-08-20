@@ -22,17 +22,22 @@ namespace _Project.CodeBase.Gameplay.Player
             _cameraProvider = cameraProvider;
         }
 
-        public async UniTask<GameObject> Create()
+        public async UniTask<GameObject> Create(HealthView healthView)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.PlayerReference);
             GameObject player = _instantiator.InstantiatePrefab(prefab);
 
+            Mover mover = new(_gameConfig.PlayerMoveSpeed, _gameConfig.PlayerRotationSpeed, player.GetComponent<CharacterController>());
+            Health health = new(_gameConfig.PlayerHealth);
+
+            player.GetComponent<Player>().Initialize(mover, health);
+
+            healthView.Initialize(health);
+
             await _cameraProvider.Create();
             _cameraProvider.Follow(player.transform);
 
-            player.GetComponent<PlayerMover>().Initialize(_gameConfig.PlayerMoveSpeed, _gameConfig.PlayerRotationSpeed);
-
-            return prefab;
+            return player;
         }
     }
 }

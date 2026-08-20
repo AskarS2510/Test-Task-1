@@ -30,5 +30,12 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  HudReference:
+    m_AssetGUID: bcd93e17c2de8284da8b4d27726bcd5e
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
   PlayerMoveSpeed: 5
   PlayerRotationSpeed: 720
+  PlayerHealth: 100

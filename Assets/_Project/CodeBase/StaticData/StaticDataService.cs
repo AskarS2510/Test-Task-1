@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using _Project.CodeBase.AssetManagement;
-using _Project.CodeBase.Gameplay;
 using Cysharp.Threading.Tasks;
 
 namespace _Project.CodeBase.StaticData

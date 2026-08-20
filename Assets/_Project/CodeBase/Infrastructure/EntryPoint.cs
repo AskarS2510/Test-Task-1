@@ -10,10 +10,10 @@ namespace _Project.CodeBase.Infrastructure
     public class EntryPoint : IInitializable
     {
         private readonly AssetProvider _assetProvider;
-        private readonly ILoadingCurtain _loadingCurtain;
         private readonly ProgressService _progressService;
         private readonly StaticDataService _staticDataService;
         private readonly SceneLoader _sceneLoader;
+        private readonly ILoadingCurtain _loadingCurtain;
 
         public EntryPoint(AssetProvider assetProvider, ILoadingCurtain loadingCurtain, ProgressService progressService,
             StaticDataService staticDataService, SceneLoader sceneLoader)
@@ -25,7 +25,12 @@ namespace _Project.CodeBase.Infrastructure
             _sceneLoader = sceneLoader;
         }
 
-        public async void Initialize()
+        public void Initialize()
+        {
+            InitializeAsync().Forget();
+        }
+
+        private async UniTask InitializeAsync()
         {
             _loadingCurtain.Show();
 
@@ -37,7 +42,9 @@ namespace _Project.CodeBase.Infrastructure
         private async UniTask InitializeServices()
         {
             _progressService.LoadProgressOrInitNew();
+
             await _staticDataService.InitializeAsync();
+
             await _assetProvider.InitializeAsync();
         }
     }

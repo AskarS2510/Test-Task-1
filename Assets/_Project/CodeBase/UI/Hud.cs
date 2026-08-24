@@ -1,4 +1,4 @@
-using _Project.CodeBase.Gameplay.Player;
+using _Project.CodeBase.Gameplay.Logic;
 using UnityEngine;
 
 namespace _Project.CodeBase.UI

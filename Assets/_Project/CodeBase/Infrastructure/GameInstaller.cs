@@ -23,7 +23,7 @@ namespace _Project.CodeBase.Infrastructure
 
         private void BindInfrastructureUI()
         {
-            Container.BindInterfacesAndSelfTo<LoadingCurtain>().FromComponentInNewPrefabResource(InfrastructureAssetPath.CURTAIN_PATH)
+            Container.BindInterfacesAndSelfTo<LoadingCurtain>().FromComponentInNewPrefabResource(InfrastructureAssetPath.CURTAIN)
                 .AsSingle();
         }
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace _Project.CodeBase.Gameplay.Player
+namespace _Project.CodeBase.Gameplay.Logic
 {
     public class InputService
     {

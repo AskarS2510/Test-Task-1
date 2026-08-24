@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7621437836980260657}
   - component: {fileID: 349716830473777305}
   - component: {fileID: 8294654311135024883}
+  - component: {fileID: 2531304866055240740}
   m_Layer: 0
   m_Name: Cinemachine
   m_TagString: Untagged
@@ -95,3 +96,16 @@ MonoBehaviour:
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
   FollowOffset: {x: 0, y: 6, z: -8}
+--- !u!114 &2531304866055240740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726774330895503014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8496c2a0864adab4a14c9413d09ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cinemachine: {fileID: 349716830473777305}

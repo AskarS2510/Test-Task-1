@@ -2,6 +2,6 @@ namespace _Project.CodeBase.Infrastructure
 {
     public class InfrastructureAssetPath
     {
-        public const string CURTAIN_PATH = "LoadingCurtain";
+        public const string CURTAIN = "LoadingCurtain";
     }
 }

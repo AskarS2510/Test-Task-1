@@ -1,6 +1,6 @@
 using System;
 
-namespace _Project.CodeBase.Gameplay.Player
+namespace _Project.CodeBase.Gameplay.Logic
 {
     public class Health
     {

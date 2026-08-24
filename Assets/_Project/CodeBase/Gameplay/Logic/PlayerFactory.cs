@@ -2,9 +2,10 @@ using _Project.CodeBase.AssetManagement;
 using _Project.CodeBase.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
-namespace _Project.CodeBase.Gameplay.Player
+namespace _Project.CodeBase.Gameplay.Logic
 {
     public class PlayerFactory
     {
@@ -12,32 +13,37 @@ namespace _Project.CodeBase.Gameplay.Player
         private readonly AssetProvider _assetProvider;
         private readonly IInstantiator _instantiator;
         private readonly CameraProvider _cameraProvider;
+        private readonly HealthPresenter _healthPresenter;
 
         public PlayerFactory(StaticDataService staticDataService, AssetProvider assetProvider, IInstantiator instantiator,
-            CameraProvider cameraProvider)
+            CameraProvider cameraProvider, HealthPresenter healthPresenter)
         {
             _gameConfig = staticDataService.GameConfig;
             _assetProvider = assetProvider;
             _instantiator = instantiator;
             _cameraProvider = cameraProvider;
+            _healthPresenter = healthPresenter;
         }
 
-        public async UniTask<GameObject> Create(HealthView healthView)
+        public async UniTask<GameObject> Create()
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.PlayerReference);
-            GameObject player = _instantiator.InstantiatePrefab(prefab);
+            GameObject go = _instantiator.InstantiatePrefab(prefab);
 
-            Mover mover = new(_gameConfig.PlayerMoveSpeed, _gameConfig.PlayerRotationSpeed, player.GetComponent<CharacterController>());
+            DirectionMover directionMover =
+                new(go.GetComponent<NavMeshAgent>(), _gameConfig.PlayerMoveSpeed, _gameConfig.PlayerRotationSpeed);
             Health health = new(_gameConfig.PlayerHealth);
 
-            player.GetComponent<Player>().Initialize(mover, health);
+            Player player = go.GetComponent<Player>();
+            player.Initialize(directionMover, health);
 
-            healthView.Initialize(health);
+            _healthPresenter.Initialize(health);
 
-            await _cameraProvider.Create();
-            _cameraProvider.Follow(player.transform);
+            _cameraProvider.Follow(go.transform);
 
-            return player;
+            player.Died += () => Object.Destroy(go);
+
+            return go;
         }
     }
 }

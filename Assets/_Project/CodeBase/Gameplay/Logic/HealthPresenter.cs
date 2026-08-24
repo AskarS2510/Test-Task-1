@@ -1,12 +1,16 @@
-using UnityEngine;
-using UnityEngine.UI;
+using _Project.CodeBase.UI;
 
-namespace _Project.CodeBase.Gameplay.Player
+namespace _Project.CodeBase.Gameplay.Logic
 {
-    public class HealthView : MonoBehaviour
+    public class HealthPresenter
     {
-        [SerializeField] private Image _fillImage;
+        private readonly HealthView _healthView;
         private Health _health;
+
+        public HealthPresenter(Hud hud)
+        {
+            _healthView = hud.HealthView;
+        }
 
         public void Initialize(Health health)
         {
@@ -15,26 +19,24 @@ namespace _Project.CodeBase.Gameplay.Player
             OnHealthChanged();
         }
 
+        public void Dispose()
+        {
+            Unsubscribe();
+        }
+
         private void Subscribe()
         {
             _health.Changed += OnHealthChanged;
-            _health.Died += Unsubscribe;
         }
 
         private void Unsubscribe()
         {
             _health.Changed -= OnHealthChanged;
-            _health.Died -= Unsubscribe;
         }
 
         private void OnHealthChanged()
         {
-            UpdateView(_health.Current, _health.Max);
-        }
-
-        private void UpdateView(int current, int max)
-        {
-            _fillImage.fillAmount = (float)current / max;
+            _healthView.UpdateView(_health.Current, _health.Max);
         }
     }
 }

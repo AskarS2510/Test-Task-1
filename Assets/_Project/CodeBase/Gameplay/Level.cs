@@ -1,23 +1,20 @@
 using _Project.CodeBase.Curtain;
-using _Project.CodeBase.Gameplay.Player;
-using _Project.CodeBase.UI;
+using _Project.CodeBase.Gameplay.Logic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.CodeBase.Gameplay
 {
-    public class Level : IInitializable
+    public class Level : IInitializable, ITickable
     {
         private readonly PlayerFactory _playerFactory;
-        private readonly UIFactory _uiFactory;
         private readonly ILoadingCurtain _loadingCurtain;
         private readonly InputService _inputService;
 
-        public Level(PlayerFactory playerFactory, UIFactory uiFactory, ILoadingCurtain loadingCurtain, InputService inputService)
+        public Level(PlayerFactory playerFactory, ILoadingCurtain loadingCurtain, InputService inputService)
         {
             _playerFactory = playerFactory;
-            _uiFactory = uiFactory;
             _loadingCurtain = loadingCurtain;
             _inputService = inputService;
         }
@@ -25,6 +22,11 @@ namespace _Project.CodeBase.Gameplay
         public void Initialize()
         {
             InitializeAsync().Forget();
+        }
+
+        public void Tick()
+        {
+            
         }
 
         private async UniTaskVoid InitializeAsync()
@@ -43,9 +45,7 @@ namespace _Project.CodeBase.Gameplay
 
         private async UniTask CreateWorld()
         {
-            Hud hud = await _uiFactory.CreateHud();
-
-            GameObject player = await _playerFactory.Create(hud.HealthView);
+            GameObject player = await _playerFactory.Create();
         }
     }
 }

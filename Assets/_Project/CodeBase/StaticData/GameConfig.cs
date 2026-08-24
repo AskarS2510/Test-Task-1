@@ -7,11 +7,11 @@ namespace _Project.CodeBase.StaticData
     public class GameConfig : ScriptableObject
     {
         public AssetReference PlayerReference;
-        public AssetReference MainCameraReference;
-        public AssetReference CinemachineReference;
-        public AssetReference HudReference;
         public float PlayerMoveSpeed;
         public float PlayerRotationSpeed;
         public int PlayerHealth;
+        public AssetReference EnemyReference;
+        public float EnemySpeed;
+        public float EnemyRotationSpeed;
     }
 }

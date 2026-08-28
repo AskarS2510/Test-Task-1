@@ -24,14 +24,8 @@ namespace _Project.CodeBase.Gameplay.Enemy
             MoveToNextPoint();
         }
 
-        private void GetNextPointIndex()
-        {
-            _currentPointIndex = (_currentPointIndex + 1) % _wayPoints.Length;
-        }
+        private void GetNextPointIndex() => _currentPointIndex = (_currentPointIndex + 1) % _wayPoints.Length;
 
-        private void MoveToNextPoint()
-        {
-            _navMeshMover.Move(_wayPoints[_currentPointIndex].position);
-        }
+        private void MoveToNextPoint() => _navMeshMover.Move(_wayPoints[_currentPointIndex].position);
     }
 }

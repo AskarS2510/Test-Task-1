@@ -26,16 +26,14 @@ namespace _Project.CodeBase.Gameplay.Logic
             Rotate(direction);
         }
 
-        private void Translate(Vector3 moveDirection)
-        {
-            _navMeshAgent.Move(moveDirection * (_speed * Time.deltaTime));
-        }
+        private void Translate(Vector3 moveDirection) => _navMeshAgent.Move(moveDirection * (_speed * Time.deltaTime));
 
         private void Rotate(Vector3 moveDirection)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
 
-            _navMeshAgent.transform.rotation = Quaternion.RotateTowards(_navMeshAgent.transform.rotation, targetRotation,
+            _navMeshAgent.transform.rotation = Quaternion.RotateTowards(_navMeshAgent.transform.rotation,
+                targetRotation,
                 _rotationSpeed * Time.deltaTime);
         }
     }

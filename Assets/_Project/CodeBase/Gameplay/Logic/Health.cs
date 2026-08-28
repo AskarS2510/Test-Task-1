@@ -4,7 +4,7 @@ namespace _Project.CodeBase.Gameplay.Logic
 {
     public class Health
     {
-        public int Max { get; private set; }
+        public int Max { get; }
         public int Current { get; private set; }
         public event Action Changed;
         public event Action Died;

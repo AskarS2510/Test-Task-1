@@ -10,7 +10,8 @@ namespace _Project.CodeBase.Infrastructure
     {
         public async UniTask Load(string nextScene)
         {
-            AsyncOperationHandle<SceneInstance> handler = Addressables.LoadSceneAsync(nextScene, LoadSceneMode.Single, false);
+            AsyncOperationHandle<SceneInstance> handler =
+                Addressables.LoadSceneAsync(nextScene, LoadSceneMode.Single, false);
 
             await handler.ToUniTask();
             await handler.Result.ActivateAsync().ToUniTask();

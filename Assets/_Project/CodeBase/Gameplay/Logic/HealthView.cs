@@ -7,9 +7,6 @@ namespace _Project.CodeBase.Gameplay.Logic
     {
         [SerializeField] private Image _fillImage;
 
-        public void UpdateView(int current, int max)
-        {
-            _fillImage.fillAmount = (float)current / max;
-        }
+        public void UpdateView(int current, int max) => _fillImage.fillAmount = (float)current / max;
     }
 }

@@ -7,9 +7,6 @@ namespace _Project.CodeBase.Data
     {
         public int CurrentLevel;
 
-        public string GetLevelKey()
-        {
-            return $"Level_{CurrentLevel}";
-        }
+        public string GetLevelKey() => $"Level_{CurrentLevel}";
     }
 }

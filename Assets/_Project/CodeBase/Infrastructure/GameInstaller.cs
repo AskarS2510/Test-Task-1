@@ -21,20 +21,13 @@ namespace _Project.CodeBase.Infrastructure
             BindInterfacesAndSelfTo<EntryPoint>();
         }
 
-        private void BindInfrastructureUI()
-        {
-            Container.BindInterfacesAndSelfTo<LoadingCurtain>().FromComponentInNewPrefabResource(InfrastructureAssetPath.CURTAIN)
+        private void BindInfrastructureUI() =>
+            Container.BindInterfacesAndSelfTo<LoadingCurtain>()
+                .FromComponentInNewPrefabResource(InfrastructureAssetPath.CURTAIN)
                 .AsSingle();
-        }
 
-        private void BindInterfacesAndSelfTo<T>()
-        {
-            Container.BindInterfacesAndSelfTo<T>().AsSingle();
-        }
+        private void BindInterfacesAndSelfTo<T>() => Container.BindInterfacesAndSelfTo<T>().AsSingle();
 
-        private void Bind<T>()
-        {
-            Container.Bind<T>().AsSingle();
-        }
+        private void Bind<T>() => Container.Bind<T>().AsSingle();
     }
 }

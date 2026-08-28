@@ -1,19 +1,18 @@
 using System;
-using Sirenix.OdinInspector;
+using _Project.CodeBase.Gameplay.Enemy;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.CodeBase.Gameplay.Logic
 {
-    public class Player : MonoBehaviour
+    public class Player : IUpdatable
     {
-        private InputService _inputService;
+        private readonly InputService _inputService;
         private DirectionMover _navMeshMover;
         private Health _health;
         public event Action Died;
 
-        [Inject]
-        public void Construct(InputService inputService)
+        public Player(InputService inputService)
         {
             _inputService = inputService;
         }
@@ -25,22 +24,15 @@ namespace _Project.CodeBase.Gameplay.Logic
             _health.Died += RaiseDied;
         }
 
-        [Button]
-        public void TakeDamage(int damage)
-        {
-            _health.TakeDamage(damage);
-        }
-
-        private void RaiseDied()
-        {
-            Died?.Invoke();
-        }
-
-        private void Update()
+        public void Update()
         {
             Vector2 inputDirection = _inputService.Motion;
 
             _navMeshMover.Move(new Vector3(inputDirection.x, 0, inputDirection.y));
         }
+
+        public void TakeDamage(int damage) => _health.TakeDamage(damage);
+
+        private void RaiseDied() => Died?.Invoke();
     }
 }

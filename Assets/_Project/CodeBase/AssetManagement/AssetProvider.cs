@@ -11,10 +11,7 @@ namespace _Project.CodeBase.AssetManagement
     {
         private readonly Dictionary<string, AsyncOperationHandle> _assetRequests = new();
 
-        public async UniTask InitializeAsync()
-        {
-            await Addressables.InitializeAsync().ToUniTask();
-        }
+        public async UniTask InitializeAsync() => await Addressables.InitializeAsync().ToUniTask();
 
         public async UniTask<TAsset> Load<TAsset>(string key) where TAsset : class
         {
@@ -29,19 +26,16 @@ namespace _Project.CodeBase.AssetManagement
             return handle.Result as TAsset;
         }
 
-        public async UniTask<TAsset> Load<TAsset>(AssetReference assetReference) where TAsset : class
-        {
-            return await Load<TAsset>(assetReference.AssetGUID);
-        }
+        public async UniTask<TAsset> Load<TAsset>(AssetReference assetReference) where TAsset : class =>
+            await Load<TAsset>(assetReference.AssetGUID);
 
-        public async UniTask<List<string>> GetAssetsListByLabel<TAsset>(string label)
-        {
-            return await GetAssetsListByLabel(label, typeof(TAsset));
-        }
+        public async UniTask<List<string>> GetAssetsListByLabel<TAsset>(string label) =>
+            await GetAssetsListByLabel(label, typeof(TAsset));
 
         public async UniTask<List<string>> GetAssetsListByLabel(string label, Type type = null)
         {
-            AsyncOperationHandle<IList<IResourceLocation>> operationHandle = Addressables.LoadResourceLocationsAsync(label, type);
+            AsyncOperationHandle<IList<IResourceLocation>> operationHandle =
+                Addressables.LoadResourceLocationsAsync(label, type);
 
             IList<IResourceLocation> locations = await operationHandle.ToUniTask();
 

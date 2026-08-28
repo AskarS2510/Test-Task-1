@@ -7,20 +7,11 @@ namespace _Project.CodeBase.Data
         private const string PROGRESS_KEY = "Progress";
         public PlayerProgress Progress { get; private set; }
 
-        public void LoadProgressOrInitNew()
-        {
-            Progress = LoadProgress() ?? NewProgress();
-        }
+        public void LoadProgressOrInitNew() => Progress = LoadProgress() ?? NewProgress();
 
-        public void SaveProgress()
-        {
-            PlayerPrefs.SetString(PROGRESS_KEY, Progress.ToJson());
-        }
+        public void SaveProgress() => PlayerPrefs.SetString(PROGRESS_KEY, Progress.ToJson());
 
-        private PlayerProgress LoadProgress()
-        {
-            return PlayerPrefs.GetString(PROGRESS_KEY)?.ToDeserialized<PlayerProgress>();
-        }
+        private PlayerProgress LoadProgress() => PlayerPrefs.GetString(PROGRESS_KEY)?.ToDeserialized<PlayerProgress>();
 
         private PlayerProgress NewProgress()
         {

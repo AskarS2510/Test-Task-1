@@ -14,14 +14,8 @@ namespace _Project.CodeBase.Gameplay.Logic
             _navMeshAgent.angularSpeed = rotationSpeed;
         }
 
-        public void Move(Vector3 destination)
-        {
-            _navMeshAgent.SetDestination(destination);
-        }
+        public void Move(Vector3 destination) => _navMeshAgent.SetDestination(destination);
 
-        public bool HasReachedDestination()
-        {
-            return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance;
-        }
+        public bool HasReachedDestination() => _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance;
     }
 }

@@ -13,11 +13,9 @@ namespace _Project.CodeBase.Curtain
             Curtain.alpha = 1;
         }
 
-        public void Hide()
-        {
+        public void Hide() =>
             //StartCoroutine(DoFadeIn());
             gameObject.SetActive(false);
-        }
 
         private IEnumerator DoFadeIn()
         {

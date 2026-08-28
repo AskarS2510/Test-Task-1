@@ -7,9 +7,6 @@ namespace _Project.CodeBase.Gameplay.Logic
     {
         [SerializeField] private CinemachineCamera _cinemachine;
 
-        public void Follow(Transform target)
-        {
-            _cinemachine.Follow = target;
-        }
+        public void Follow(Transform target) => _cinemachine.Follow = target;
     }
 }

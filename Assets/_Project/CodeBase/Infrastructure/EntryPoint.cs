@@ -25,10 +25,7 @@ namespace _Project.CodeBase.Infrastructure
             _sceneLoader = sceneLoader;
         }
 
-        public void Initialize()
-        {
-            InitializeAsync().Forget();
-        }
+        public void Initialize() => InitializeAsync().Forget();
 
         private async UniTask InitializeAsync()
         {

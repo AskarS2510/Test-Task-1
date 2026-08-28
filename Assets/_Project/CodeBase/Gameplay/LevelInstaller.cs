@@ -24,33 +24,22 @@ namespace _Project.CodeBase.Gameplay
             Bind<UIFactory>();
             Bind<InputService>();
             Bind<HealthPresenter>();
+            Bind<Updater>();
+            Bind<Pauser>();
+            
+            Container.Bind<Player>().AsTransient();
 
             BindInterfacesAndSelfTo<Level>();
         }
 
-        private void BindCameraProvider()
-        {
-            Container.Bind<CameraProvider>().FromInstance(_cameraProvider).AsSingle();
-        }
+        private void BindCameraProvider() => Container.Bind<CameraProvider>().FromInstance(_cameraProvider).AsSingle();
 
-        private void BindHud()
-        {
-            Container.Bind<Hud>().FromInstance(_hud).AsSingle();
-        }
+        private void BindHud() => Container.Bind<Hud>().FromInstance(_hud).AsSingle();
 
-        private void BindWayPoints()
-        {
-            Container.Bind<WayPoints>().FromInstance(_wayPoints).AsSingle();
-        }
+        private void BindWayPoints() => Container.Bind<WayPoints>().FromInstance(_wayPoints).AsSingle();
 
-        private void BindInterfacesAndSelfTo<T>()
-        {
-            Container.BindInterfacesAndSelfTo<T>().AsSingle();
-        }
+        private void BindInterfacesAndSelfTo<T>() => Container.BindInterfacesAndSelfTo<T>().AsSingle();
 
-        private void Bind<T>()
-        {
-            Container.Bind<T>().AsSingle();
-        }
+        private void Bind<T>() => Container.Bind<T>().AsSingle();
     }
 }

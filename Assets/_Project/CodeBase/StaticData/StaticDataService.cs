@@ -9,10 +9,7 @@ namespace _Project.CodeBase.StaticData
         private readonly AssetProvider _assetProvider;
         public GameConfig GameConfig { get; private set; }
 
-        public StaticDataService(AssetProvider assetProvider)
-        {
-            _assetProvider = assetProvider;
-        }
+        public StaticDataService(AssetProvider assetProvider) => _assetProvider = assetProvider;
 
         public async UniTask InitializeAsync()
         {
@@ -23,9 +20,7 @@ namespace _Project.CodeBase.StaticData
             await UniTask.WhenAll(tasks);
         }
 
-        private async UniTask LoadGameConfig()
-        {
+        private async UniTask LoadGameConfig() =>
             GameConfig = await _assetProvider.Load<GameConfig>(AssetLabels.GAME_CONFIG);
-        }
     }
 }

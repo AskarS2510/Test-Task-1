@@ -11,10 +11,7 @@ namespace _Project.CodeBase.Gameplay.Joystick
         private InputService _inputService;
 
         [Inject]
-        public void Construct(InputService inputService)
-        {
-            _inputService = inputService;
-        }
+        public void Construct(InputService inputService) => _inputService = inputService;
 
         private void OnEnable()
         {
@@ -34,19 +31,10 @@ namespace _Project.CodeBase.Gameplay.Joystick
             Show();
         }
 
-        private void OnReleased()
-        {
-            Hide();
-        }
+        private void OnReleased() => Hide();
 
-        private void Show()
-        {
-            _canvasGroup.alpha = 1;
-        }
+        private void Show() => _canvasGroup.alpha = 1;
 
-        private void Hide()
-        {
-            _canvasGroup.alpha = 0;
-        }
+        private void Hide() => _canvasGroup.alpha = 0;
     }
 }

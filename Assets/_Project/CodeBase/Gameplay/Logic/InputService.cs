@@ -11,10 +11,7 @@ namespace _Project.CodeBase.Gameplay.Logic
         public event Action<Vector2> Clicked;
         public event Action Released;
 
-        public InputService()
-        {
-            _systemActions = new InputSystemActions();
-        }
+        public InputService() => _systemActions = new InputSystemActions();
 
         public void Enable()
         {
@@ -30,14 +27,9 @@ namespace _Project.CodeBase.Gameplay.Logic
             _systemActions.Disable();
         }
 
-        private void OnClick(InputAction.CallbackContext obj)
-        {
+        private void OnClick(InputAction.CallbackContext obj) =>
             Clicked?.Invoke(_systemActions.UI.Point.ReadValue<Vector2>());
-        }
 
-        private void OnCanceled(InputAction.CallbackContext obj)
-        {
-            Released?.Invoke();
-        }
+        private void OnCanceled(InputAction.CallbackContext obj) => Released?.Invoke();
     }
 }

@@ -14,7 +14,8 @@ namespace _Project.CodeBase.Gameplay.Enemy
         private readonly AssetProvider _assetProvider;
         private readonly IInstantiator _instantiator;
 
-        public EnemyFactory(StaticDataService staticDataService, AssetProvider assetProvider, IInstantiator instantiator)
+        public EnemyFactory(StaticDataService staticDataService, AssetProvider assetProvider,
+            IInstantiator instantiator)
         {
             _gameConfig = staticDataService.GameConfig;
             _assetProvider = assetProvider;
@@ -26,7 +27,8 @@ namespace _Project.CodeBase.Gameplay.Enemy
             GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.EnemyReference);
             GameObject go = _instantiator.InstantiatePrefab(prefab);
 
-            DirectionMover directionMover = new(go.GetComponent<NavMeshAgent>(), _gameConfig.EnemySpeed, _gameConfig.EnemyRotationSpeed);
+            DirectionMover directionMover = new(go.GetComponent<NavMeshAgent>(), _gameConfig.EnemySpeed,
+                _gameConfig.EnemyRotationSpeed);
 
             Player player = go.GetComponent<Player>();
 

@@ -15,10 +15,12 @@ namespace _Project.CodeBase.Gameplay.Logic
         private readonly CameraProvider _cameraProvider;
         private readonly HealthPresenter _healthPresenter;
         private readonly Updater _updater;
+        private readonly InputService _inputService;
 
         public PlayerFactory(StaticDataService staticDataService, AssetProvider assetProvider,
             IInstantiator instantiator,
-            CameraProvider cameraProvider, HealthPresenter healthPresenter, Updater updater)
+            CameraProvider cameraProvider, HealthPresenter healthPresenter, Updater updater,
+            InputService inputService)
         {
             _gameConfig = staticDataService.GameConfig;
             _assetProvider = assetProvider;
@@ -26,6 +28,7 @@ namespace _Project.CodeBase.Gameplay.Logic
             _cameraProvider = cameraProvider;
             _healthPresenter = healthPresenter;
             _updater = updater;
+            _inputService = inputService;
         }
 
         public async UniTask<GameObject> Create()
@@ -33,12 +36,12 @@ namespace _Project.CodeBase.Gameplay.Logic
             GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.PlayerReference);
             GameObject go = _instantiator.InstantiatePrefab(prefab);
 
-            DirectionMover directionMover =
-                new(go.GetComponent<NavMeshAgent>(), _gameConfig.PlayerMoveSpeed, _gameConfig.PlayerRotationSpeed);
-            Health health = new(_gameConfig.PlayerHealth);
+            NavMeshAgent navMeshAgent = go.GetComponent<NavMeshAgent>();
 
-            Player player = _instantiator.Instantiate<Player>();
-            player.Initialize(directionMover, health);
+            DirectionMover directionMover = new(navMeshAgent, _gameConfig.PlayerMoveSpeed,
+                _gameConfig.PlayerRotationSpeed);
+            Health health = new(_gameConfig.PlayerHealth);
+            Player player = new(_inputService, directionMover, health);
 
             _healthPresenter.Initialize(health);
 

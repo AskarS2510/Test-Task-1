@@ -27,8 +27,9 @@ namespace _Project.CodeBase.Gameplay.Enemy
             GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.EnemyReference);
             GameObject go = _instantiator.InstantiatePrefab(prefab);
 
-            DirectionMover directionMover = new(go.GetComponent<NavMeshAgent>(), _gameConfig.EnemySpeed,
-                _gameConfig.EnemyRotationSpeed);
+            NavMeshAgent agent = go.GetComponent<NavMeshAgent>();
+
+            DirectionMover directionMover = new(agent, _gameConfig.EnemySpeed, _gameConfig.EnemyRotationSpeed);
 
             Player player = go.GetComponent<Player>();
 

@@ -1,24 +1,19 @@
 using System;
 using _Project.CodeBase.Gameplay.Enemy;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.CodeBase.Gameplay.Logic
 {
-    public class Player : IUpdatable
+    public class Player : IUpdatable, IDamageable
     {
         private readonly InputService _inputService;
-        private DirectionMover _navMeshMover;
-        private Health _health;
+        private readonly DirectionMover _navMeshMover;
+        private readonly Health _health;
         public event Action Died;
 
-        public Player(InputService inputService)
+        public Player(InputService inputService, DirectionMover directionMover, Health health)
         {
             _inputService = inputService;
-        }
-
-        public void Initialize(DirectionMover directionMover, Health health)
-        {
             _navMeshMover = directionMover;
             _health = health;
             _health.Died += RaiseDied;

@@ -26,8 +26,6 @@ namespace _Project.CodeBase.Gameplay
             Bind<HealthPresenter>();
             Bind<Updater>();
             Bind<Pauser>();
-            
-            Container.Bind<Player>().AsTransient();
 
             BindInterfacesAndSelfTo<Level>();
         }

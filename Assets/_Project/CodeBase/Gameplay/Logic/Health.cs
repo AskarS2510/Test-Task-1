@@ -2,7 +2,7 @@ using System;
 
 namespace _Project.CodeBase.Gameplay.Logic
 {
-    public class Health
+    public class Health : IDamageable
     {
         public int Max { get; }
         public int Current { get; private set; }

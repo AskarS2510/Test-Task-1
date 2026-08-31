@@ -1,4 +1,5 @@
 using _Project.CodeBase.AssetManagement;
+using _Project.CodeBase.Gameplay.Enemy;
 using _Project.CodeBase.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -16,11 +17,11 @@ namespace _Project.CodeBase.Gameplay.Logic
         private readonly HealthPresenter _healthPresenter;
         private readonly Updater _updater;
         private readonly InputService _inputService;
+        private readonly DamageableRepository _damageableRepository;
 
         public PlayerFactory(StaticDataService staticDataService, AssetProvider assetProvider,
-            IInstantiator instantiator,
-            CameraProvider cameraProvider, HealthPresenter healthPresenter, Updater updater,
-            InputService inputService)
+            IInstantiator instantiator, CameraProvider cameraProvider, HealthPresenter healthPresenter, Updater updater,
+            InputService inputService, DamageableRepository damageableRepository)
         {
             _gameConfig = staticDataService.GameConfig;
             _assetProvider = assetProvider;
@@ -29,6 +30,7 @@ namespace _Project.CodeBase.Gameplay.Logic
             _healthPresenter = healthPresenter;
             _updater = updater;
             _inputService = inputService;
+            _damageableRepository = damageableRepository;
         }
 
         public async UniTask<GameObject> Create()
@@ -41,17 +43,19 @@ namespace _Project.CodeBase.Gameplay.Logic
             DirectionMover directionMover = new(navMeshAgent, _gameConfig.PlayerMoveSpeed,
                 _gameConfig.PlayerRotationSpeed);
             Health health = new(_gameConfig.PlayerHealth);
-            Player player = new(_inputService, directionMover, health);
+            PlayerController playerController = new(_inputService, directionMover);
 
             _healthPresenter.Initialize(health);
 
             _cameraProvider.Follow(go.transform);
 
-            _updater.Register(player);
+            _updater.Register(playerController);
+            _damageableRepository.Register(go, health);
 
-            player.Died += () =>
+            health.Died += () =>
             {
-                _updater.Unregister(player);
+                _updater.Unregister(playerController);
+                _damageableRepository.Unregister(go);
                 Object.Destroy(go);
             };
 

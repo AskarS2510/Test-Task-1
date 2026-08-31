@@ -1,3 +1,4 @@
+using System;
 using _Project.CodeBase.AssetManagement;
 using _Project.CodeBase.Gameplay.Logic;
 using _Project.CodeBase.StaticData;
@@ -5,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace _Project.CodeBase.Gameplay.Enemy
 {
@@ -13,27 +15,87 @@ namespace _Project.CodeBase.Gameplay.Enemy
         private readonly GameConfig _gameConfig;
         private readonly AssetProvider _assetProvider;
         private readonly IInstantiator _instantiator;
+        private readonly WayPoints _wayPoints;
+        private readonly DamageableRepository _damageableRepository;
+        private readonly Updater _updater;
 
         public EnemyFactory(StaticDataService staticDataService, AssetProvider assetProvider,
-            IInstantiator instantiator)
+            IInstantiator instantiator, WayPoints wayPoints, DamageableRepository damageableRepository, Updater updater)
         {
             _gameConfig = staticDataService.GameConfig;
             _assetProvider = assetProvider;
             _instantiator = instantiator;
+            _wayPoints = wayPoints;
+            _damageableRepository = damageableRepository;
+            _updater = updater;
         }
 
-        public async UniTask<GameObject> CreatePatrol()
+        public async UniTask<GameObject> Create(EnemyType enemyType, Vector3 at)
         {
-            GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.EnemyReference);
-            GameObject go = _instantiator.InstantiatePrefab(prefab);
+            switch (enemyType)
+            {
+                case EnemyType.Patrol:
+                    return await CreatePatrol(at);
+                case EnemyType.Hunter:
+                    return await CreateHunter(at);
+                default:
+                    return null;
+            }
+        }
+
+        private async UniTask<GameObject> CreatePatrol(Vector3 at)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.PatrolReference);
+            GameObject go = _instantiator.InstantiatePrefab(prefab, at, Quaternion.identity, null);
 
             NavMeshAgent agent = go.GetComponent<NavMeshAgent>();
+            DamageTrigger damageTrigger = go.GetComponentInChildren<DamageTrigger>();
 
-            DirectionMover directionMover = new(agent, _gameConfig.EnemySpeed, _gameConfig.EnemyRotationSpeed);
+            NavMeshMover navMeshMover = new(agent, _gameConfig.EnemySpeed, _gameConfig.EnemyRotationSpeed);
+            WayPointsMover wayPointsMover = new(navMeshMover, _wayPoints);
+            CollisionDamager collisionDamager = new(_damageableRepository, _gameConfig.CollisionDamage,
+                damageTrigger);
 
-            Player player = go.GetComponent<Player>();
+            collisionDamager.Initialize();
 
-            player.Died += () => Object.Destroy(go);
+            _updater.Register(wayPointsMover);
+
+            damageTrigger.Collided += _ =>
+            {
+                _updater.Unregister(wayPointsMover);
+                collisionDamager.Dispose();
+                Object.Destroy(go);
+            };
+
+            return go;
+        }
+
+        private async UniTask<GameObject> CreateHunter(Vector3 at)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.HunterReference);
+            GameObject go = _instantiator.InstantiatePrefab(prefab, at, Quaternion.identity, null);
+
+            NavMeshAgent agent = go.GetComponent<NavMeshAgent>();
+            DamageTrigger damageTrigger = go.GetComponentInChildren<DamageTrigger>();
+            AggroTrigger aggroTrigger = go.GetComponentInChildren<AggroTrigger>();
+
+            NavMeshMover navMeshMover = new(agent, _gameConfig.EnemySpeed, _gameConfig.EnemyRotationSpeed);
+            CollisionDamager collisionDamager = new(_damageableRepository, _gameConfig.CollisionDamage,
+                damageTrigger);
+            Chaser chaser = new(aggroTrigger, navMeshMover);
+
+            chaser.Initialize();
+            collisionDamager.Initialize();
+
+            _updater.Register(chaser);
+
+            damageTrigger.Collided += _ =>
+            {
+                _updater.Unregister(chaser);
+                chaser.Dispose();
+                collisionDamager.Dispose();
+                Object.Destroy(go);
+            };
 
             return go;
         }

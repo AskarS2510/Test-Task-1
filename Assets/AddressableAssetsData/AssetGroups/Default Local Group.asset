@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: d334c1e3a1bd31c4392bd75b8c96022b
   m_SerializeEntries:
+  - m_GUID: 0b4d263212f43dc4587f54be48318885
+    m_Address: Assets/_Project/Resources_moved/Gameplay/Patrol.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 156fce3ca50462b44a49a6638f852656
     m_Address: Assets/_Project/Resources_moved/Gameplay/Player.prefab
     m_ReadOnly: 0
@@ -37,6 +42,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bcd93e17c2de8284da8b4d27726bcd5e
     m_Address: Assets/_Project/Resources_moved/Gameplay/UIMediator.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c6c1c419fbbdc304cb4d33b13032e0eb
+    m_Address: Assets/_Project/Resources_moved/Gameplay/Enemies/Hunter.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

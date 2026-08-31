@@ -1,4 +1,5 @@
 using _Project.CodeBase.Curtain;
+using _Project.CodeBase.Gameplay.Enemy;
 using _Project.CodeBase.Gameplay.Logic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -13,15 +14,19 @@ namespace _Project.CodeBase.Gameplay
         private readonly InputService _inputService;
         private readonly Updater _updater;
         private readonly Pauser _pauser;
+        private readonly EnemyFactory _enemyFactory;
+        private readonly EnemySpawnPoints _enemySpawnPoints;
 
         public Level(PlayerFactory playerFactory, ILoadingCurtain loadingCurtain, InputService inputService,
-            Updater updater, Pauser pauser)
+            Updater updater, Pauser pauser, EnemyFactory enemyFactory, EnemySpawnPoints enemySpawnPoints)
         {
             _playerFactory = playerFactory;
             _loadingCurtain = loadingCurtain;
             _inputService = inputService;
             _updater = updater;
             _pauser = pauser;
+            _enemyFactory = enemyFactory;
+            _enemySpawnPoints = enemySpawnPoints;
         }
 
         public void Initialize() => InitializeAsync().Forget();
@@ -36,7 +41,7 @@ namespace _Project.CodeBase.Gameplay
 
         private async UniTaskVoid InitializeAsync()
         {
-            await Create();
+            await CreateWorld();
 
             _loadingCurtain.Hide();
 
@@ -45,11 +50,14 @@ namespace _Project.CodeBase.Gameplay
             _pauser.Resume();
         }
 
-        private async UniTask Create() => await CreateWorld();
-
         private async UniTask CreateWorld()
         {
             GameObject player = await _playerFactory.Create();
+
+            foreach (SpawnPoint spawnPoint in _enemySpawnPoints.Points)
+            {
+                await _enemyFactory.Create(spawnPoint.EnemyType, spawnPoint.transform.position);
+            }
         }
     }
 }

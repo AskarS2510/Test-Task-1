@@ -12,8 +12,12 @@ namespace _Project.CodeBase.StaticData
         [field: SerializeField] public int PlayerHealth { get; private set; }
         [field: SerializeField] public AssetReference PatrolReference { get; private set; }
         [field: SerializeField] public AssetReference HunterReference { get; private set; }
+        [field: SerializeField] public AssetReference ShooterReference { get; private set; }
+        [field: SerializeField] public AssetReference ProjectileReference { get; private set; }
         [field: SerializeField] public float EnemySpeed { get; private set; }
         [field: SerializeField] public float EnemyRotationSpeed { get; private set; }
         [field: SerializeField] public int CollisionDamage { get; private set; }
+        [field: SerializeField] public int ProjectileSpeed { get; private set; }
+        [field: SerializeField] public int ProjectileDamage { get; private set; }
     }
 }

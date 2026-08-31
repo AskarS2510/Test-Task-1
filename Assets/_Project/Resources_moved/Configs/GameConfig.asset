@@ -33,6 +33,20 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
+  <ShooterReference>k__BackingField:
+    m_AssetGUID: 34a62fe05b3c9ff469aab5a77db034c9
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
+  <ProjectileReference>k__BackingField:
+    m_AssetGUID: ac6ec3fe18f8e6546936303d74f4d0e4
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 1
   <EnemySpeed>k__BackingField: 2
   <EnemyRotationSpeed>k__BackingField: 720
   <CollisionDamage>k__BackingField: 40
+  <ProjectileSpeed>k__BackingField: 8
+  <ProjectileDamage>k__BackingField: 10

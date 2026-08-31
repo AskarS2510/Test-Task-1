@@ -18,9 +18,11 @@ namespace _Project.CodeBase.Gameplay.Enemy
         private readonly WayPoints _wayPoints;
         private readonly DamageableRepository _damageableRepository;
         private readonly Updater _updater;
+        private readonly ProjectileFactory _projectileFactory;
 
         public EnemyFactory(StaticDataService staticDataService, AssetProvider assetProvider,
-            IInstantiator instantiator, WayPoints wayPoints, DamageableRepository damageableRepository, Updater updater)
+            IInstantiator instantiator, WayPoints wayPoints, DamageableRepository damageableRepository, Updater updater,
+            ProjectileFactory projectileFactory)
         {
             _gameConfig = staticDataService.GameConfig;
             _assetProvider = assetProvider;
@@ -28,6 +30,7 @@ namespace _Project.CodeBase.Gameplay.Enemy
             _wayPoints = wayPoints;
             _damageableRepository = damageableRepository;
             _updater = updater;
+            _projectileFactory = projectileFactory;
         }
 
         public async UniTask<GameObject> Create(EnemyType enemyType, Vector3 at)
@@ -38,6 +41,8 @@ namespace _Project.CodeBase.Gameplay.Enemy
                     return await CreatePatrol(at);
                 case EnemyType.Hunter:
                     return await CreateHunter(at);
+                case EnemyType.Shooter:
+                    return await CreateShooter(at);
                 default:
                     return null;
             }
@@ -77,12 +82,12 @@ namespace _Project.CodeBase.Gameplay.Enemy
 
             NavMeshAgent agent = go.GetComponent<NavMeshAgent>();
             DamageTrigger damageTrigger = go.GetComponentInChildren<DamageTrigger>();
-            AggroTrigger aggroTrigger = go.GetComponentInChildren<AggroTrigger>();
+            ChaseTrigger chaseTrigger = go.GetComponentInChildren<ChaseTrigger>();
 
             NavMeshMover navMeshMover = new(agent, _gameConfig.EnemySpeed, _gameConfig.EnemyRotationSpeed);
             CollisionDamager collisionDamager = new(_damageableRepository, _gameConfig.CollisionDamage,
                 damageTrigger);
-            Chaser chaser = new(aggroTrigger, navMeshMover);
+            Chaser chaser = new(chaseTrigger, navMeshMover);
 
             chaser.Initialize();
             collisionDamager.Initialize();
@@ -96,6 +101,23 @@ namespace _Project.CodeBase.Gameplay.Enemy
                 collisionDamager.Dispose();
                 Object.Destroy(go);
             };
+
+            return go;
+        }
+
+        private async UniTask<GameObject> CreateShooter(Vector3 at)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(_gameConfig.ShooterReference);
+            GameObject go = _instantiator.InstantiatePrefab(prefab, at, Quaternion.identity, null);
+
+            AggroTrigger aggroTrigger = go.GetComponentInChildren<AggroTrigger>();
+            FirePoint firePoint = go.GetComponentInChildren<FirePoint>();
+
+            Shooter shooter = new(aggroTrigger, _projectileFactory, firePoint.transform);
+
+            shooter.Initialize();
+
+            _updater.Register(shooter);
 
             return go;
         }

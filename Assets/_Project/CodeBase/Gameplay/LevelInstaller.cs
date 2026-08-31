@@ -24,6 +24,7 @@ namespace _Project.CodeBase.Gameplay
 
             Bind<PlayerFactory>();
             Bind<EnemyFactory>();
+            Bind<ProjectileFactory>();
             Bind<UIFactory>();
             Bind<InputService>();
             Bind<HealthPresenter>();

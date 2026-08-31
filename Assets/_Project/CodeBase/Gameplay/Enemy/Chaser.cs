@@ -5,19 +5,19 @@ namespace _Project.CodeBase.Gameplay.Enemy
 {
     public class Chaser : IUpdatable
     {
-        private readonly AggroTrigger _aggroTrigger;
+        private readonly ChaseTrigger _chaseTrigger;
         private readonly NavMeshMover _navMeshMover;
         private Transform _target;
 
-        public Chaser(AggroTrigger aggroTrigger, NavMeshMover navMeshMover)
+        public Chaser(ChaseTrigger chaseTrigger, NavMeshMover navMeshMover)
         {
-            _aggroTrigger = aggroTrigger;
+            _chaseTrigger = chaseTrigger;
             _navMeshMover = navMeshMover;
         }
 
-        public void Initialize() => _aggroTrigger.Collided += Track;
+        public void Initialize() => _chaseTrigger.Collided += Track;
 
-        public void Dispose() => _aggroTrigger.Collided -= Track;
+        public void Dispose() => _chaseTrigger.Collided -= Track;
 
         public void Update()
         {

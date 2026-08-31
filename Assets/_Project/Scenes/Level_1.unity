@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -608,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -648,7 +648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028740062561477946, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: <EnemyType>k__BackingField
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1174,7 +1174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1182,7 +1182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2647693641683893595, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1214,7 +1214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028740062561477946, guid: 26f2ca2535e126743bb91b177e00020e, type: 3}
       propertyPath: <EnemyType>k__BackingField
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

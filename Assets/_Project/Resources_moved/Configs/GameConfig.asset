@@ -22,19 +22,19 @@ MonoBehaviour:
   <PlayerRotationSpeed>k__BackingField: 720
   <PlayerHealth>k__BackingField: 200
   <PatrolReference>k__BackingField:
-    m_AssetGUID: 0b4d263212f43dc4587f54be48318885
+    m_AssetGUID: 283b5e7fc33e75c41a335c280492a8fa
     m_SubObjectName: 
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
   <HunterReference>k__BackingField:
-    m_AssetGUID: c6c1c419fbbdc304cb4d33b13032e0eb
+    m_AssetGUID: f4f171fad03d92642b462ea256db98d2
     m_SubObjectName: 
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
   <ShooterReference>k__BackingField:
-    m_AssetGUID: 34a62fe05b3c9ff469aab5a77db034c9
+    m_AssetGUID: 9670e942ab5c98b438aa925720794566
     m_SubObjectName: 
     m_SubObjectGUID: 
     m_SubObjectType: 
@@ -45,7 +45,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 1
-  <EnemySpeed>k__BackingField: 2
+  <EnemySpeed>k__BackingField: 5
   <EnemyRotationSpeed>k__BackingField: 720
   <CollisionDamage>k__BackingField: 40
   <ProjectileSpeed>k__BackingField: 8

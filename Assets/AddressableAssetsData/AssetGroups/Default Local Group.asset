@@ -15,18 +15,13 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: d334c1e3a1bd31c4392bd75b8c96022b
   m_SerializeEntries:
-  - m_GUID: 0b4d263212f43dc4587f54be48318885
-    m_Address: Assets/_Project/Resources_moved/Gameplay/Patrol.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 156fce3ca50462b44a49a6638f852656
     m_Address: Assets/_Project/Resources_moved/Gameplay/Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 34a62fe05b3c9ff469aab5a77db034c9
-    m_Address: Assets/_Project/Resources_moved/Gameplay/Enemies/Shooter.prefab
+  - m_GUID: 283b5e7fc33e75c41a335c280492a8fa
+    m_Address: Assets/_Project/Resources_moved/Gameplay/Enemies/Patrol.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -37,6 +32,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 926144eec30489e45814df3028759613
     m_Address: Gameplay/CinemachineCamera
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9670e942ab5c98b438aa925720794566
+    m_Address: Assets/_Project/Resources_moved/Gameplay/Enemies/Shooter.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -55,13 +55,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c6c1c419fbbdc304cb4d33b13032e0eb
-    m_Address: Assets/_Project/Resources_moved/Gameplay/Enemies/Hunter.prefab
+  - m_GUID: d8fcf1b4f77ea08459cb030229a99076
+    m_Address: Level_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d8fcf1b4f77ea08459cb030229a99076
-    m_Address: Level_1
+  - m_GUID: f4f171fad03d92642b462ea256db98d2
+    m_Address: Assets/_Project/Resources_moved/Gameplay/Enemies/Hunter.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
